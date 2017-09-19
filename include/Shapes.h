@@ -93,9 +93,9 @@ class Triangle : public Shape {
 
 private:
 
-    vertex v1;
-    vertex v2;
-    vertex v3;
+    const vertex v1;
+    const vertex v2;
+    const vertex v3;
 
 public:
 
@@ -157,6 +157,7 @@ double sumOfPerimeter(const std::vector<Shape *> & shapes);
 Shape* theLargestArea(const std::vector<Shape *> & shapes);
 
 void sortByDecreasingPerimeter(std::vector<Shape *> & shapes);
+
 
 
 #endif // SHAPES_H_INCLUDED

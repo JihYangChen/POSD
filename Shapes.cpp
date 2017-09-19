@@ -77,3 +77,4 @@ void sortByDecreasingPerimeter(std::vector<Shape *> & shapes) {
         left = shift;
     }
 }
+
