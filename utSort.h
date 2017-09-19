@@ -120,11 +120,11 @@ TEST (Sort, sortByDecreasingArea) {
 
 TEST (Sort, sortByIncreasingCompactness) {
 
-    Rectangle rec1(0, 0, 2, 6, "rec1");             // rec1's compactness = 0.589
-    Circle cir1(0, 0, 1, "cir1");                   // cir1's compactness = 0.920
-    Circle cir2(0, 0, 2, "cir2");                   // cir2's compactness = 1.000
+    Rectangle rec1(0, 0, 2, 6, "rec1");             // rec1's compactness = 0.75
+    Circle cir1(0, 0, 1, "cir1");                   // cir1's compactness = 0.5
+    Circle cir2(0, 0, 2, "cir2");                   // cir2's compactness = 1
     vertex v1 = {0, 0}, v2 = {4, 0}, v3 = {2, 2};
-    Triangle tri1(v1, v2, v3, "tri1");              // tri1's compactness = 0.54
+    Triangle tri1(v1, v2, v3, "tri1");              // tri1's compactness = 0.41
     
     list<Shape * > shapesList ;
     
@@ -138,9 +138,9 @@ TEST (Sort, sortByIncreasingCompactness) {
     
     ASSERT_EQ(tri1.getShapeName(), (*it)->getShapeName());  // compare shape's name
     ++it;
-    ASSERT_EQ(rec1.getShapeName(), (*it)->getShapeName());
-    ++it;
     ASSERT_EQ(cir1.getShapeName(), (*it)->getShapeName());
+    ++it;
+    ASSERT_EQ(rec1.getShapeName(), (*it)->getShapeName());
     ++it;
     ASSERT_EQ(cir2.getShapeName(), (*it)->getShapeName());
     

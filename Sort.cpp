@@ -32,10 +32,10 @@ void Sort::sortByDecreasingArea(std::list<Shape *> * shapeList) {
 void Sort::sortByIncreasingCompactness(std::list<Shape *> * shapeList) {
     
     auto compactnessSmaller = [](Shape * a, Shape * b) {
-        double polsbyPopper_A, polsbyPopper_B;
-        polsbyPopper_A = (4 * M_PI * a->area()) / (a-> perimeter() * a -> perimeter());
-        polsbyPopper_B = (4 * M_PI * b->area()) / (b-> perimeter() * b -> perimeter());
-        return polsbyPopper_A < polsbyPopper_B;
+        double compactness_A, compactness_B;
+        compactness_A = a->area() / a-> perimeter();
+        compactness_B = b->area() / b-> perimeter();
+        return compactness_A < compactness_B;
     };
     shapeList->sort (compactnessSmaller);
     
