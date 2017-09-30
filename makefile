@@ -18,7 +18,7 @@ all: utTerm
 utTerm: mainTerm.o
 	g++ -o hw2 mainTerm.o -lgtest -lpthread
 mainTerm.o: mainTerm.cpp utTerm.h atom.h variable.h Number.h term.h
-	g++ -std=c++11 -c mainTerm.cpp
+	g++ -std=gnu++0x -c mainTerm.cpp
 
 #exp: mainExp.o
 #	g++ -o exp mainExp.o -lgtest -lpthread
