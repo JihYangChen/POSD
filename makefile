@@ -2,7 +2,7 @@ all: utTerm
 
 utTerm: mainTerm.o
 ifeq (${OS}, Windows_NT)
-    g++ -o hw2 mainTerm.o -lgtest
+	g++ -o hw2 mainTerm.o -lgtest
 else
 	g++ -o hw2 mainTerm.o -lgtest -lpthread
 endif
