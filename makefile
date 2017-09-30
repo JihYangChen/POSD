@@ -42,7 +42,9 @@ mainTerm.o: mainTerm.cpp utTerm.h atom.h variable.h Number.h term.h
 #g++ -std=c++11 -c var.cpp
 #list.o: list.h list.cpp term.h var.h
 #	g++ -std=c++11 -c list.cpp
-clean:
+
+ifeq (${OS}, Windows_NT)
+	del *.o *.exe
+else
 	rm -f *.o madRace utAtom hw2 utVariable utTerm
-stat:
-	wc *.h *.cpp
+endif
