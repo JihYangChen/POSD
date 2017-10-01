@@ -13,8 +13,8 @@ private:
 public:
     Number(int num) : _value(intConvertToString(num)), Term(intConvertToString(num)) { }
     string value(void) const { return _value; }
-    bool match(Term *term) { return this->symbol() == term -> symbol(); }
-    bool match(Variable *variable) { return variable -> match(this); }
+    bool match(Term &term) { return this->symbol() == term.symbol(); }
+    bool match(Var &variable) { return variable.match(*this); }
 };
 
 std::string intConvertToString(int num) {

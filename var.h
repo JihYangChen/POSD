@@ -1,20 +1,20 @@
-#ifndef VARIABLE_H
-#define VARIABLE_H
+#ifndef VAR_H
+#define VAR_H
 
 #include "term.h"
 
-class Variable : public Term {
+class Var : public Term {
 public:
-    Variable(string s) : Term(s){}
+    Var(string s) : Term(s){}
     string value(){ return _value; }
     
-    bool match(Term *term) {
+    bool match(Term &term) {
         bool ret = _assignable;
         if(_assignable){
-          _value = (term -> symbol()) ;
+          _value = (term.symbol()) ;
           _assignable = false;
         }
-        else if(_value == term -> symbol())
+        else if(_value == term.symbol())
             ret = true;
         return ret;
     }
