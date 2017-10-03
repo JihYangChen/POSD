@@ -3,9 +3,9 @@
 
 #include "term.h"
 
-class Var : public Term {
+class Variable : public Term {
 public:
-    Var(string s) : Term(s){}
+    Variable(string s) : Term(s){}
     string value(){ return _value; }
     
     bool match(Term &term) {
