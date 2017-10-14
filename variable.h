@@ -1,27 +1,28 @@
-#ifndef VAR_H
-#define VAR_H
+#ifndef VARIABLE_H
+#define VARIABLE_H
 
-#include "term.h"
+#include "Term.h";
 
-class Variable : public Term {
+class Variable : public Term{
 public:
-    Variable(string s) : Term(s){}
-    string value(){ return _value; }
-    
-    bool match(Term &term) {
-        bool ret = _assignable;
-        if(_assignable){
-          _value = (term.symbol()) ;
-          _assignable = false;
-        }
-        else if(_value == term.symbol())
-            ret = true;
-        return ret;
+    //Variable(string s) : _symbol(s) {}
+  /*
+  Variable(string s):_symbol(s){}
+  string const _symbol;
+  string value(){ return _value; }
+  bool match( Atom atom ){
+    bool ret = _assignable;
+    if(_assignable){
+      _value = atom._symbol ;
+      _assignable = false;
     }
-
+    return ret;
+  }
+   
 private:
+  
   string _value;
-  bool _assignable = true;
+    */
 };
 
 #endif
