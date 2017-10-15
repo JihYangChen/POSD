@@ -11,7 +11,7 @@ string Variable::value() const {
         return symbol();
     
     if(!isAssignable())
-        return getProxyRoot()->getProxyTerm()->symbol();
+        return getProxyRoot()->getProxyTerm()->value();
     else
         return getProxyRoot()->getProxyString();
 }
@@ -32,6 +32,9 @@ bool Variable::match(Term &term) {
     // Variable.match(Variable)
     if (variable) {
         if (!_proxyList && !variable->_proxyList) {
+            // match itself
+            if(variable == this)
+                return true;
             _proxyList = new Proxy(variable->symbol());
             variable->_proxyList = _proxyList;
         }

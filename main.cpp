@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
-#include "utProxy.h"
 #include "utStruct.h"
+#include "utVariable.h"
 
 int main( int argc , char **argv )
 {
