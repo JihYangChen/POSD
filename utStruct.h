@@ -2,6 +2,7 @@
 #include "atom.h"
 #include "struct.h"
 #include "variable.h"
+#include "number.h"
 
 TEST(Struct, hobby)
 {
@@ -107,9 +108,15 @@ TEST(Struct, var_match_atom)
 // and #value() of s1 should also return "s1(s2(X))"
 TEST(Struct, nested_struct1)
 {
-
+    Variable X("X");
+    std::vector<Term *> v1 = {&X};
+    Struct s2(Atom("s2"), v1);
+    std::vector<Term *> v2 = {&s2};
+    Struct s1(Atom("s1"), v2);
+    EXPECT_EQ("s1(s2(X))", s1.symbol());
+    EXPECT_EQ("s1(s2(X))", s1.value());
 }
-/*
+
 // Given there are Struct s1 contains Struct s2
 // And Struct s2 contains Variable X
 // When Variable X matches an Atom "tom"
@@ -117,7 +124,15 @@ TEST(Struct, nested_struct1)
 // and #value() of s1 should return "s1(s2(tom))"
 TEST(Struct, nested_struct2)
 {
-
+    Variable X("X");
+    Atom tom = Atom("tom");
+    X.match(tom);
+    std::vector<Term *> v1 = {&X};
+    Struct s2(Atom("s2"), v1);
+    std::vector<Term *> v2 = {&s2};
+    Struct s1(Atom("s1"), v2);
+    EXPECT_EQ("s1(s2(X))", s1.symbol());
+    EXPECT_EQ("s1(s2(tom))", s1.value());
 }
 
 // Given there are Struct s1 contains Struct s2
@@ -127,7 +142,15 @@ TEST(Struct, nested_struct2)
 // and #value() of s1 should return "s1(s2(3.14))"
 TEST(Struct, nested_struct3)
 {
-
+    Variable X("X");
+    Number pi = Number(3.14);
+    X.match(pi);
+    std::vector<Term *> v1 = {&X};
+    Struct s2(Atom("s2"), v1);
+    std::vector<Term *> v2 = {&s2};
+    Struct s1(Atom("s1"), v2);
+    EXPECT_EQ("s1(s2(X))", s1.symbol());
+    EXPECT_EQ("s1(s2(3.14))", s1.value());
 }
 
 // Given there are Struct s1 contains Struct s2 and Variable X
@@ -139,9 +162,14 @@ TEST(Struct, nested_struct3)
 TEST(Struct, nested_struct_and_multiVariable)
 {
     Variable X("X"), Y("Y");
+    Atom kent_beck = Atom("kent_beck");
+    X.match(kent_beck);
+    X.match(Y);
     std::vector<Term *> v1 = {&Y};
     Struct s2(Atom("s2"), v1);
     std::vector<Term *> v = {&s2, &X};
     Struct s1(Atom("s1"), v);
+    EXPECT_EQ("s1(s2(Y), X)", s1.symbol());
+    EXPECT_EQ("s1(s2(kent_beck), kent_beck)", s1.value());
 }
-*/
+
