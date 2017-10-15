@@ -14,7 +14,7 @@ bool Atom::match(Term &term) {
     Variable *variable = dynamic_cast<Variable *> (&term);
     // term's type is Variable
     if(variable)
-        return variable->match(term);
+        return variable->match(*this);
     
     // term's type isn't Variable
     else
