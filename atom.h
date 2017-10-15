@@ -8,7 +8,7 @@ private:
 	string _symbol;
 
 public:
-	Atom (string s) : _symbol(s) {}
+    Atom (string s);
     string symbol() const;
     string value() const;
     bool match(Term &term);

@@ -1,5 +1,7 @@
 #include "struct.h"
 
+Struct::Struct(Atom const &name, std::vector<Term *> args) : _name(name), _args(args) {}
+
 Term * Struct::args(int index) {
     return _args[index];
 }
