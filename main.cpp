@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
-#include "utMadRace.h"
+#include "utStruct.h"
+#include "utProxy.h"
 
 int main( int argc , char **argv )
 {

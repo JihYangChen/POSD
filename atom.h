@@ -4,10 +4,15 @@
 #include "term.h"
 
 class Atom : public Term {
+private:
+	string _symbol;
+
 public:
-    Atom (string s) : Term(s) { }
-    bool match(Term &term) { return this->symbol() == term.symbol(); }
-    bool match(Variable &variable) { return variable.match(*this); }
+    Atom (string s);
+    string symbol() const;
+    string value() const;
+    bool match(Term &term);
 };
+
 
 #endif
