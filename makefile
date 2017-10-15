@@ -2,7 +2,7 @@ all: utTerm
 
 utTerm: main.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw3 main.o -lgtest
+	g++ -o hw3 main.o atom.o number.o variable.o struct.o proxy.o -lgtest
 else
 	g++ -o hw3 main.o atom.o number.o variable.o struct.o proxy.o -lgtest -lpthread
 endif
