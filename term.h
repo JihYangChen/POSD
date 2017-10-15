@@ -1,17 +1,18 @@
-#ifndef Term_h
-#define Term_h
+#ifndef TERM_H
+#define TERM_H
 
 #include <string>
+
 using std::string;
 
-class Term {
+class Term{
+
 private:
-    const std::string _symbol;
     
 public:
-    Term(string s) : _symbol(s){}
-    virtual bool match(Term &term) = 0;
-    string symbol(void) const { return _symbol; }
+	virtual string symbol() const = 0;
+    virtual string value() const = 0;
+	virtual bool match(Term &term) = 0;
 };
 
-#endif /* Term_h */
+#endif

@@ -1,27 +1,21 @@
-#ifndef VAR_H
-#define VAR_H
+#ifndef VARIABLE_H
+#define VARIABLE_H
 
 #include "term.h"
+#include "proxy.h"
 
 class Variable : public Term {
 public:
-    Variable(string s) : Term(s){}
-    string value(){ return _value; }
+    Variable(string s);
+    string symbol() const;
+    string value() const;
+    bool match(Term &term);
+    Proxy * getProxyRoot() const;
+    bool isAssignable() const;
     
-    bool match(Term &term) {
-        bool ret = _assignable;
-        if(_assignable){
-          _value = (term.symbol()) ;
-          _assignable = false;
-        }
-        else if(_value == term.symbol())
-            ret = true;
-        return ret;
-    }
-
 private:
-  string _value;
-  bool _assignable = true;
+    string _symbol;
+    Proxy *_proxyList;
 };
 
 #endif
