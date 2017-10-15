@@ -84,7 +84,7 @@ TEST(Struct, var)
     EXPECT_EQ("s(X)", s.symbol());
     EXPECT_EQ("s(X)", s.value());
 }
-/*
+
 // Given there is Struct s contains a Variable X
 // When Variable X matches an Atom "tom"
 // Then #symbol() should return "s(X)"
@@ -109,7 +109,7 @@ TEST(Struct, nested_struct1)
 {
 
 }
-
+/*
 // Given there are Struct s1 contains Struct s2
 // And Struct s2 contains Variable X
 // When Variable X matches an Atom "tom"

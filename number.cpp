@@ -1,16 +1,20 @@
-#include "atom.h"
+#include "number.h"
 
-Atom::Atom (string s) : _symbol(s) {}
+Number::Number (double value) {
+    std::stringstream ss;
+    ss << value;
+    ss >> _symbol;
+}
 
-string Atom::symbol() const {
+string Number::symbol() const {
     return _symbol;
 }
 
-string Atom::value() const {
+string Number::value() const {
     return _symbol;
 }
 
-bool Atom::match(Term &term) {
+bool Number::match(Term &term) {
     Variable *variable = dynamic_cast<Variable *> (&term);
     // term's type is Variable
     if(variable)

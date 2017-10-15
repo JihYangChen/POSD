@@ -2,6 +2,7 @@
 #define ATOM_H
 
 #include "term.h"
+#include "variable.h"
 
 class Atom : public Term {
 private:

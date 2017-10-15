@@ -1,13 +1,13 @@
 #include "proxy.h"
 
-Proxy::Proxy(string proxyValue) : _nextProxy(NULL), _proxyValue(proxyValue), _proxyTerm(NULL) {}
+Proxy::Proxy(string ProxyString) : _nextProxy(NULL), _proxyString(ProxyString), _proxyTerm(NULL) {}
 
-string Proxy::getProxyValue() const {
-    return _proxyValue;
+string Proxy::getProxyString() const {
+    return _proxyString;
 }
 
-void Proxy::setProxyValue(string s) {
-    _proxyValue = s;
+void Proxy::setProxyString(string s) {
+    _proxyString = s;
 }
 
 Proxy * Proxy::getProxyRoot() {

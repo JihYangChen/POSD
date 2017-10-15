@@ -23,11 +23,20 @@ string Struct::symbol() const {
 }
 
 string Struct::value() const {
-    return symbol();
+    string returnStr = _name.value() + "(";
+    
+    for (int i=0; i<_args.size()-1; i++) {
+        returnStr += _args[i] -> value() + ", ";
+    }
+    
+    returnStr += _args[_args.size()-1]->value() + ")";
+    
+    return returnStr;
 }
 
 bool Struct::match(Term &term) {
     Struct *ps = dynamic_cast<Struct *>(&term);
+    // term's type is Struct
     if (ps) {
         if (!_name.match(ps->_name))
             return false;
@@ -40,5 +49,11 @@ bool Struct::match(Term &term) {
         return true;
     }
     
+    Variable *variable = dynamic_cast<Variable *> (&term);
+    // term's type is Variable
+    if(variable)
+        return variable->match(term);
+    
+    // term's type isn't Variable or Struct
     return false;
 }

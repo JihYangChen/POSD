@@ -1,5 +1,5 @@
-#ifndef Proxy_h
-#define Proxy_h
+#ifndef PROXY_H
+#define PROXY_H
 
 #include "term.h"
 #include <string>
@@ -9,12 +9,12 @@ class Proxy {
 private:
     Proxy *_nextProxy;
     Term *_proxyTerm;
-    string _proxyValue;
+    string _proxyString;
     
 public:
-    Proxy(string proxyValue);
-    string getProxyValue() const;
-    void setProxyValue(string s);
+    Proxy(string proxyString);
+    string getProxyString() const;
+    void setProxyString(string s);
     Proxy * getProxyRoot();
     void setNextProxy(Proxy *nextProxy);
     Term * getProxyTerm() const;

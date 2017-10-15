@@ -13,7 +13,7 @@ string Variable::value() const {
     if(!isAssignable())
         return getProxyRoot()->getProxyTerm()->symbol();
     else
-        return getProxyRoot()->getProxyValue();
+        return getProxyRoot()->getProxyString();
 }
 
 Proxy * Variable::getProxyRoot() const {
@@ -37,16 +37,16 @@ bool Variable::match(Term &term) {
         }
         else if (_proxyList && !variable->_proxyList) {
             variable->_proxyList = getProxyRoot();
-            getProxyRoot()->setProxyValue(variable -> symbol());
+            getProxyRoot()->setProxyString(variable -> symbol());
         }
         else if (!_proxyList && variable->_proxyList) {
             _proxyList = variable->getProxyRoot();
-            getProxyRoot()->setProxyValue(symbol());
+            getProxyRoot()->setProxyString(symbol());
         }
         else if (_proxyList && _proxyList) {
             // Both root's proxyTerm is empty.
             if (!(getProxyRoot()->getProxyTerm()) && !(variable->getProxyRoot()->getProxyTerm())) {
-                Proxy *newProxy = new Proxy(variable->getProxyRoot()->getProxyValue());
+                Proxy *newProxy = new Proxy(variable->getProxyRoot()->getProxyString());
                 getProxyRoot() -> setNextProxy(newProxy);
                 variable -> getProxyRoot() -> setNextProxy(newProxy);
             }
