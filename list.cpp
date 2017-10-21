@@ -1,4 +1,5 @@
 #include "list.h"
+#include <iostream>
 
 List::List() { }
 
@@ -56,14 +57,18 @@ bool List::match(Term &term) {
 
 Term * List::head() const {
     if (_elements.empty())
-        return NULL;
+        throw "Accessing head in an empty list";
     else
         return getElement(0);
 }
 
 List * List::tail() const {
-    vector<Term *> tailListElements(++(_elements.begin()), _elements.end());
-    List * tailListPtr = new List(tailListElements);
-    
-    return tailListPtr;
+    if (_elements.empty())
+        throw "Accessing tail in an empty list";
+    else {
+        vector<Term *> tailListElements(++(_elements.begin()), _elements.end());
+        List * tailListPtr = new List(tailListElements);
+        
+        return tailListPtr;
+    }
 }
