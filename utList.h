@@ -235,7 +235,7 @@ TEST (List, emptyExecptionOfHead) {
         list.head();
     }
     catch (const char *str) {
-        EXPECT_EQ("Accessing head in an empty list", str);
+        EXPECT_EQ("Accessing head in an empty list", string(str));
     }
 }
 
@@ -250,7 +250,7 @@ TEST (List, emptyExecptionOfTail) {
         list.tail();
     }
     catch (const char *str) {
-        EXPECT_EQ("Accessing tail in an empty list", str);
+        EXPECT_EQ("Accessing tail in an empty list", string(str));
     }
 }
 
