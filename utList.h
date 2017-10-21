@@ -240,7 +240,7 @@ TEST (List, emptyExecptionOfHead) {
 }
 
 // Given there is a empty list
-// When client still want to get the head of list
+// When client still want to get the tail of list
 // Then it should throw a string: "Accessing tail in an empty list" as an exception.
 TEST (List, emptyExecptionOfTail) {
     vector<Term *> args;
