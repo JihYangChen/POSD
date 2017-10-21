@@ -13,11 +13,14 @@ Atom Struct::name() {
 string Struct::symbol() const {
     string returnStr = _name.symbol() + "(";
     
-    for (int i=0; i<_args.size()-1; i++) {
+    for (int i=0; i<(int)_args.size()-1; i++) {
         returnStr += _args[i] -> symbol() + ", ";
     }
     
-    returnStr += _args[_args.size()-1]->symbol() + ")";
+    if(_args.size())
+        returnStr += _args[_args.size()-1]->symbol();
+    
+    returnStr += ")";
         
     return returnStr;
 }
@@ -25,11 +28,14 @@ string Struct::symbol() const {
 string Struct::value() const {
     string returnStr = _name.value() + "(";
     
-    for (int i=0; i<_args.size()-1; i++) {
+    for (int i=0; i<(int)_args.size()-1; i++) {
         returnStr += _args[i] -> value() + ", ";
     }
     
-    returnStr += _args[_args.size()-1]->value() + ")";
+    if(_args.size())
+        returnStr += _args[_args.size()-1]->value();
+    
+    returnStr += ")";
     
     return returnStr;
 }
