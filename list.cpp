@@ -57,14 +57,14 @@ bool List::match(Term &term) {
 
 Term * List::head() const {
     if (_elements.empty())
-        throw "Accessing head in an empty list";
+        throw string("Accessing head in an empty list");
     else
         return getElement(0);
 }
 
 List * List::tail() const {
     if (_elements.empty())
-        throw "Accessing tail in an empty list";
+        throw string("Accessing tail in an empty list");
     else {
         vector<Term *> tailListElements(++(_elements.begin()), _elements.end());
         List * tailListPtr = new List(tailListElements);
