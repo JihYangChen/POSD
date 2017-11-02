@@ -133,6 +133,19 @@ TEST_F(ScannerTest, nextTokenAtomWithRightPara) {
     EXPECT_EQ(4, scanner.position());
 }
 
+TEST_F(ScannerTest, nextTokenListEmpty) {
+    //---------------012
+    Scanner scanner("[]");
+    EXPECT_EQ(0, scanner.position());
+    int token = scanner.nextToken();
+    EXPECT_EQ('[', token);
+    EXPECT_EQ(1, scanner.position());
+    
+    token = scanner.nextToken();
+    EXPECT_EQ(']', token);
+    EXPECT_EQ(2, scanner.position());
+}
+
 
 
 
