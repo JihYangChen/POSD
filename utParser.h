@@ -42,6 +42,7 @@ TEST_F(ParserTest, createArgs)
     ASSERT_EQ("1", terms[0]->symbol());
     ASSERT_EQ("X", terms[1]->symbol());
     ASSERT_EQ("tom", terms[2]->symbol());
+    ASSERT_EQ(9, parser._scanner.position());
 }
 
 TEST_F(ParserTest, createTerms)
@@ -50,7 +51,6 @@ TEST_F(ParserTest, createTerms)
     Parser parser(scanner);
     ASSERT_EQ("s(1, X, tom)", parser.createTerm()->symbol());
 }
-
 
 // Given there is string: " 12345,  tom" in scanner.
 // When parser parses all terms via scanner.
