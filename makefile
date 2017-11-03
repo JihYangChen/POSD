@@ -2,7 +2,7 @@ all: hw5
 
 hw5: main.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw5 main.o atom.o number.o variable.o struct.o proxy.o list.o parser.o -lgtest
+	g++ -o hw5 main.o atom.o number.o variable.o struct.o proxy.o list.o -lgtest
 else
 	g++ -o hw5 main.o atom.o number.o variable.o struct.o proxy.o list.o -lgtest -lpthread
 endif
