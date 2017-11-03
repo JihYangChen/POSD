@@ -18,20 +18,20 @@ protected:
 TEST_F(ParserTest, createTerm_Var){
     Scanner scanner("X");
     Parser parser(scanner);
-    ASSERT_EQ("X", parser.createTerm()->symbol());
+    EXPECT_EQ("X", parser.createTerm()->symbol());
 }
 
 TEST_F(ParserTest, createTerm_Num){
     Scanner scanner("123");
     Parser parser(scanner);
-    ASSERT_EQ("123", parser.createTerm()->symbol());
+    EXPECT_EQ("123", parser.createTerm()->symbol());
 }
 
 TEST_F(ParserTest, createTerm_Atom)
 {
     Scanner scanner("tom");
     Parser parser(scanner);
-    ASSERT_EQ("tom", parser.createTerm()->symbol());
+    EXPECT_EQ("tom", parser.createTerm()->symbol());
 }
 
 TEST_F(ParserTest, createArgs)
@@ -39,17 +39,16 @@ TEST_F(ParserTest, createArgs)
     Scanner scanner("1, X, tom");
     Parser parser(scanner);
     vector<Term*> terms = parser.getArgs();
-    ASSERT_EQ("1", terms[0]->symbol());
-    ASSERT_EQ("X", terms[1]->symbol());
-    ASSERT_EQ("tom", terms[2]->symbol());
-    ASSERT_EQ(9, parser._scanner.position());
+    EXPECT_EQ("1", terms[0]->symbol());
+    EXPECT_EQ("X", terms[1]->symbol());
+    EXPECT_EQ("tom", terms[2]->symbol());
 }
 
 TEST_F(ParserTest, createTerms)
 {
     Scanner scanner("s(1, X, tom)");
     Parser parser(scanner);
-    ASSERT_EQ("s(1, X, tom)", parser.createTerm()->symbol());
+    EXPECT_EQ("s(1, X, tom)", parser.createTerm()->symbol());
 }
 
 // Given there is string: " 12345,  tom" in scanner.
@@ -58,8 +57,9 @@ TEST_F(ParserTest, createTerms)
 TEST_F(ParserTest, listOfTermsTwo) {
     Scanner scanner(" 12345,  tom");
     Parser parser(scanner);
-    ASSERT_EQ("12345", parser.createTerm()->symbol());
-    ASSERT_EQ("tom", parser.createTerm()->symbol());
+    vector<Term*> terms = parser.getArgs();
+    EXPECT_EQ("12345", terms[0]->symbol());
+    EXPECT_EQ("tom", terms[1]->symbol());
 }
 
 
@@ -70,7 +70,7 @@ TEST_F(ParserTest, listOfTermsTwo) {
 TEST_F(ParserTest, parseStructOfStruct) {
     Scanner scanner("point(1, X, z(1,2,3))");
     Parser parser(scanner);
-    ASSERT_EQ("point(1, X, z(1, 2, 3))", parser.createTerm()->symbol());
+    EXPECT_EQ("point(1, X, z(1, 2, 3))", parser.createTerm()->symbol());
 }
 
 
@@ -80,8 +80,9 @@ TEST_F(ParserTest, parseStructOfStruct) {
 TEST_F(ParserTest, listOfTermsTwoNumbers) {
     Scanner scanner(" 12345,  67");
     Parser parser(scanner);
-    ASSERT_EQ("12345", parser.createTerm()->symbol());
-    ASSERT_EQ("67", parser.createTerm()->symbol());
+    vector<Term*> terms = parser.getArgs();
+    EXPECT_EQ("12345", terms[0]->symbol());
+    EXPECT_EQ("67", terms[1]->symbol());
 }
 
 
@@ -92,7 +93,7 @@ TEST_F(ParserTest, listOfTermsTwoNumbers) {
 TEST_F(ParserTest, parseStructThreeArgs) {
     Scanner scanner("point(1, X, z)");
     Parser parser(scanner);
-    ASSERT_EQ("point(1, X, z)", parser.createTerm()->symbol());
+    EXPECT_EQ("point(1, X, z)", parser.createTerm()->symbol());
 }
 
 
@@ -103,7 +104,7 @@ TEST_F(ParserTest, parseStructThreeArgs) {
 TEST_F(ParserTest, parseListEmpty) {
     Scanner scanner("   [   ]");
     Parser parser(scanner);
-    ASSERT_EQ("[]", parser.createTerm()->symbol());
+    EXPECT_EQ("[]", parser.createTerm()->symbol());
 }
 
 
@@ -114,7 +115,7 @@ TEST_F(ParserTest, parseListEmpty) {
 TEST_F(ParserTest, parseVar) {
     Scanner scanner("_date");
     Parser parser(scanner);
-    ASSERT_EQ("_date", parser.createTerm()->symbol());
+    EXPECT_EQ("_date", parser.createTerm()->symbol());
 }
 
 
@@ -124,7 +125,7 @@ TEST_F(ParserTest, parseVar) {
 TEST_F(ParserTest, listOfTermsEmpty) {
     Scanner scanner("");
     Parser parser(scanner);
-    ASSERT_EQ(NULL, parser.createTerm());
+    EXPECT_EQ(NULL, parser.createTerm());
 }
 
 
@@ -135,16 +136,18 @@ TEST_F(ParserTest, listOfTermsEmpty) {
 TEST_F(ParserTest, parseStructOfStructAllTheWay) {
     Scanner scanner("s(s(s(s(1))))");
     Parser parser(scanner);
-    ASSERT_EQ("s(s(s(s(1))))", parser.createTerm()->symbol());
+    EXPECT_EQ("s(s(s(s(1))))", parser.createTerm()->symbol());
 }
 
-/*
+
 // Given there is string: "   [  [1], [] ]" in scanner.
 // When parser parses all terms via scanner.
 // Then it should return a List.
 // And #symbol() of List should return "[[1], []]".
 TEST_F(ParserTest, parseListOfLists) {
-    
+    Scanner scanner("   [  [1], [] ]");
+    Parser parser(scanner);
+    EXPECT_EQ("[[1], []]", parser.createTerm()->symbol());
 }
 
 
@@ -153,7 +156,9 @@ TEST_F(ParserTest, parseListOfLists) {
 // Then it should return a List.
 // And #symbol() of List should return "[[1], [], s(s(1))]".
 TEST_F(ParserTest, parseListOfListsAndStruct) {
-    
+    Scanner scanner("   [  [1], [], s(s(1)) ]   ");
+    Parser parser(scanner);
+    EXPECT_EQ("[[1], [], s(s(1))]", parser.createTerm()->symbol());
 }
 
 // Given there is string: "   [1, 2]" in scanner.
@@ -161,16 +166,25 @@ TEST_F(ParserTest, parseListOfListsAndStruct) {
 // Then it should return a List.
 // And #symbol() of List should return "[1, 2]".
 TEST_F(ParserTest, parseList) {
-    
+    Scanner scanner("   [1, 2]");
+    Parser parser(scanner);
+    EXPECT_EQ("[1, 2]", parser.createTerm()->symbol());
 }
 
 // Given there is string: "[1,2)" in scanner.
 // When parser parses all terms via scanner.
 // Then it should return a string: "unexpected token" as exception.
 TEST_F(ParserTest, illegal1) {
-    
+    Scanner scanner("[1,2)");
+    Parser parser(scanner);
+    try {
+        parser.createTerm();
+    }
+    catch (string str) {
+        EXPECT_EQ("unexpected token", str);
+    }
 }
-
+/*
 // Given there is string: ".(1,[])" in scanner.
 // When parser parses all terms via scanner.
 // Then it should return a Struct which contains two terms.

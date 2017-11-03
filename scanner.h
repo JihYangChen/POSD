@@ -80,6 +80,10 @@ public:
         return buffer[pos++];
     }
     
+    void positionBackward() {
+        pos--;
+    }
+    
 private:
     string buffer;
     int pos;

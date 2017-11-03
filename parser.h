@@ -31,12 +31,15 @@ public:
             Atom* atom = new Atom(symtable[_scanner.tokenValue()].first);
             
             // Create Struct
-            if(_scanner.currentChar() == '(') {
-                _scanner.nextToken();
+            if(_scanner.nextToken() == '(') {
+                
                 vector<Term*> structArgs = getArgs();
+                if(_scanner.nextToken() != ')')
+                    throw string("unexpected token");
                 return new Struct(*atom, structArgs);
             }
             else {
+                _scanner.positionBackward();
                 return atom;
             }
         }
@@ -44,6 +47,8 @@ public:
         // Create List
         else if (token == '[') {
             vector<Term *> listArgs = getArgs();
+            if(_scanner.nextToken() != ']')
+                throw string("unexpected token");
             return new List(listArgs);
         }
         
@@ -52,37 +57,33 @@ public:
             return createTerm();
         }
         
-        return NULL;
+        
+        return nullptr;
     }
     
-    // Return a vector of arguments, after calling the right parentheses and square brackets will be discarded.
+    // Return a vector of arguments, after calling the right parentheses and square brackets will NOT be discarded(nextToken will be ')' or ']').
     vector<Term*> getArgs()
     {
+        vector<Term*> args = {};
         Term* term = createTerm();
-        vector<Term*> args;
-        if(term) {
+        if (term) {
             args.push_back(term);
-            while(_scanner.nextToken() == ',') {
+            while (_scanner.currentChar() == ',') {
+                _scanner.nextToken();
                 args.push_back(createTerm());
             }
         }
-        // Empty structure or list.
-        /*
+        // Empty Struct or List
         else {
             _scanner.positionBackward();
         }
-        else {
-            while(_scanner.nextToken() == ',') {
-                args.push_back(createTerm());
-            }
-        }
-         */
+        
         return args;
     }
     
     
     
-//private:
+private:
     Scanner _scanner;
 };
 #endif
