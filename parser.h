@@ -27,7 +27,7 @@ public:
         }
      
         // Create Atom or Struct
-        else if (token == ATOM){
+        else if (token == ATOM || token == ATOMSC){
             Atom* atom = new Atom(symtable[_scanner.tokenValue()].first);
             
             // Create Struct
@@ -50,11 +50,6 @@ public:
             if(_scanner.nextToken() != ']')
                 throw string("unexpected token");
             return new List(listArgs);
-        }
-        
-        // Create more term
-        else if (token == ',') {
-            return createTerm();
         }
         
         
