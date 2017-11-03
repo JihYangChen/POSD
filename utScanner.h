@@ -117,4 +117,36 @@ TEST_F(ScannerTest, nextTokenAtomSC) {
     EXPECT_EQ(ATOMSC, symtable[0].second);
 }
 
+TEST_F(ScannerTest, nextTokenAtomWithRightPara) {
+    //---------------01234
+    Scanner scanner("tom)");
+    EXPECT_EQ(0, scanner.position());
+    int token = scanner.nextToken();
+    EXPECT_EQ(ATOM, token);
+    EXPECT_EQ(0, scanner.tokenValue());
+    EXPECT_EQ(3, scanner.position());
+    EXPECT_EQ("tom", symtable[0].first);
+    EXPECT_EQ(ATOM, symtable[0].second);
+    
+    token = scanner.nextToken();
+    EXPECT_EQ(')', token);
+    EXPECT_EQ(4, scanner.position());
+}
+
+TEST_F(ScannerTest, nextTokenListEmpty) {
+    //---------------012
+    Scanner scanner("[]");
+    EXPECT_EQ(0, scanner.position());
+    int token = scanner.nextToken();
+    EXPECT_EQ('[', token);
+    EXPECT_EQ(1, scanner.position());
+    
+    token = scanner.nextToken();
+    EXPECT_EQ(']', token);
+    EXPECT_EQ(2, scanner.position());
+}
+
+
+
+
 #endif

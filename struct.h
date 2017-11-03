@@ -9,10 +9,11 @@ class Struct : public Term
 {
 public:
     Struct(Atom const &name, std::vector<Term *> args);
-    Term * args(int index);
+    Term & args(int index);
     Atom name();
     string symbol() const;
     string value() const;
+    int arity();
     bool match(Term &term);
     
 private:
