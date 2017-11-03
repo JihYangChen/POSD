@@ -2,8 +2,8 @@
 
 Struct::Struct(Atom const &name, std::vector<Term *> args) : _name(name), _args(args) {}
 
-Term & Struct::args(int index) {
-    return *_args[index];
+Term * Struct::args(int index) {
+    return _args[index];
 }
 
 Atom Struct::name() {
@@ -53,7 +53,7 @@ bool Struct::match(Term &term) {
         if (_args.size() != ps->_args.size())
             return false;
         for (int i=0; i<_args.size(); i++) {
-            if(!args(i).match(ps->args(i)))
+            if(!args(i)->match(*(ps->args(i))))
                 return false;
         }
         return true;

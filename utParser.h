@@ -215,8 +215,8 @@ TEST_F(ParserTest, ListAsStruct) {
     
     EXPECT_EQ(".(1, [])", testStruct->symbol());
     EXPECT_EQ(2, testStruct->arity());
-    EXPECT_EQ("1", testStruct->args(0).symbol());
-    EXPECT_EQ("[]", testStruct->args(1).symbol());
+    EXPECT_EQ("1", testStruct->args(0)->symbol());
+    EXPECT_EQ("[]", testStruct->args(1)->symbol());
 }
 
 
@@ -233,8 +233,8 @@ TEST_F(ParserTest, ListAsStruct2) {
     
     EXPECT_EQ(".(2, .(1, []))", testStruct->symbol());
     EXPECT_EQ(2, testStruct->arity());
-    EXPECT_EQ("2", testStruct->args(0).symbol());
-    EXPECT_EQ(".(1, [])", testStruct->args(1).symbol());
+    EXPECT_EQ("2", testStruct->args(0)->symbol());
+    EXPECT_EQ(".(1, [])", testStruct->args(1)->symbol());
 }
 
 
