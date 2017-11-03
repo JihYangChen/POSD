@@ -138,7 +138,7 @@ TEST_F(ParserTest, listOfTermsEmpty) {
     Scanner scanner("");
     Parser parser(scanner);
     
-    EXPECT_EQ(NULL, parser.createTerm());
+    EXPECT_EQ(nullptr, parser.createTerm());
 }
 
 
