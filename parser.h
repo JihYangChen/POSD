@@ -30,16 +30,13 @@ public:
         else if (token == ATOM){
             Atom* atom = new Atom(symtable[_scanner.tokenValue()].first);
             
-            int nextToken = _scanner.nextToken();
-            
             // Create Struct
-            if(nextToken == '(') {
+            if(_scanner.currentChar() == '(') {
+                _scanner.nextToken();
                 vector<Term*> structArgs = getArgs();
-                if(_currentToken == ')')
-                    return new Struct(*atom, structArgs);
+                return new Struct(*atom, structArgs);
             }
             else {
-                _scanner.positionBackward();
                 return atom;
             }
         }
@@ -47,9 +44,7 @@ public:
         // Create List
         else if (token == '[') {
             vector<Term *> listArgs = getArgs();
-            
-            if(_currentToken == ']')
-                return new List(listArgs);
+            return new List(listArgs);
         }
         
         // Create more term
@@ -60,20 +55,28 @@ public:
         return NULL;
     }
     
+    // Return a vector of arguments, after calling the right parentheses and square brackets will be discarded.
     vector<Term*> getArgs()
     {
         Term* term = createTerm();
         vector<Term*> args;
         if(term) {
             args.push_back(term);
+            while(_scanner.nextToken() == ',') {
+                args.push_back(createTerm());
+            }
         }
         // Empty structure or list.
+        /*
         else {
             _scanner.positionBackward();
         }
-        while((_currentToken = _scanner.nextToken()) == ',') {
-            args.push_back(createTerm());
+        else {
+            while(_scanner.nextToken() == ',') {
+                args.push_back(createTerm());
+            }
         }
+         */
         return args;
     }
     
@@ -81,6 +84,5 @@ public:
     
 //private:
     Scanner _scanner;
-    int _currentToken;
 };
 #endif

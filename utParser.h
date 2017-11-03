@@ -106,7 +106,7 @@ TEST_F(ParserTest, parseListEmpty) {
     ASSERT_EQ("[]", parser.createTerm()->symbol());
 }
 
-/*
+
 // Given there is string: "_date" in scanner.
 // When parser parses all terms via scanner.
 // Then it should return a Variable.
@@ -122,7 +122,9 @@ TEST_F(ParserTest, parseVar) {
 // When parser parses all terms via scanner.
 // Then it should return nothing.
 TEST_F(ParserTest, listOfTermsEmpty) {
-    
+    Scanner scanner("");
+    Parser parser(scanner);
+    ASSERT_EQ(NULL, parser.createTerm());
 }
 
 
@@ -131,10 +133,12 @@ TEST_F(ParserTest, listOfTermsEmpty) {
 // Then it should return a Struct.
 // And #symbol() of Strcut should return "s(s(s(s(1))))".
 TEST_F(ParserTest, parseStructOfStructAllTheWay) {
-    
+    Scanner scanner("s(s(s(s(1))))");
+    Parser parser(scanner);
+    ASSERT_EQ("s(s(s(s(1))))", parser.createTerm()->symbol());
 }
 
-
+/*
 // Given there is string: "   [  [1], [] ]" in scanner.
 // When parser parses all terms via scanner.
 // Then it should return a List.
@@ -172,7 +176,7 @@ TEST_F(ParserTest, illegal1) {
 // Then it should return a Struct which contains two terms.
 // And #arity() of the Struct should be 2.
 // And #symbol() of Struct should return ".(1, [])".
-// And the first term should be number: "1", the second term should be another Strcut: "[]".
+// And the first term should be number: "1", the second term should be another List: "[]".
 TEST_F(ParserTest, ListAsStruct) {
     
 }
