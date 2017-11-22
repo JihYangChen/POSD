@@ -196,11 +196,11 @@ TEST_F(ParserTest, createTerm_ListAsStruct2) {
   EXPECT_EQ(".(1, [])", s->symbol());
 }
 
-/*
 TEST_F(ParserTest, OneMatching) {
   Scanner scanner("X=1.");
   Parser parser(scanner);
   parser.matchings();
+
   vector<Term *> terms = parser.getTerms();
   EXPECT_EQ(2, terms.size());
   EXPECT_EQ("X", terms[0]->symbol());
@@ -209,11 +209,14 @@ TEST_F(ParserTest, OneMatching) {
 
   Node * et = parser.expressionTree();
   EXPECT_EQ(EQUALITY, et->payload);
-
+/*
   EXPECT_TRUE(et->evaluate());
   EXPECT_EQ("1", terms[0]->value());
+ */
+ 
 }
 
+/*
 TEST_F(ParserTest, OneMatchingFalse) {
   Scanner scanner("1=2.");
   Parser parser(scanner);
