@@ -5,17 +5,17 @@ List::List() { }
 
 List::List(vector<Term *> const & elements) : _elements(elements) { }
 
-Term * List::getElement(int index) const {
+Term * List::args(int index) const {
     return _elements[index];
 }
 
 string List::symbol() const {
     string returnString = "[";
     for (int i=0; i<((int)_elements.size()-1); i++) {
-        returnString += getElement(i)->symbol() + ", ";
+        returnString += args(i)->symbol() + ", ";
     }
     if (_elements.size())
-        returnString += getElement((int)_elements.size()-1) -> symbol();
+        returnString += args((int)_elements.size()-1) -> symbol();
     returnString += "]";
     
     return returnString;
@@ -24,10 +24,10 @@ string List::symbol() const {
 string List::value() const {
     string returnString = "[";
     for (int i=0; i<((int)_elements.size()-1); i++) {
-        returnString += getElement(i)->value() + ", ";
+        returnString += args(i)->value() + ", ";
     }
     if (_elements.size())
-        returnString += getElement((int)_elements.size()-1) -> value();
+        returnString += args((int)_elements.size()-1) -> value();
     returnString += "]";
     
     return returnString;
@@ -40,7 +40,7 @@ bool List::match(Term &term) {
         if (_elements.size() != listPtr->_elements.size())
             return false;
         for (int i=0; i<_elements.size(); i++) {
-            if(!getElement(i)->match(*(listPtr->getElement(i))))
+            if(!args(i)->match(*(listPtr->args(i))))
                 return false;
         }
         return true;
@@ -59,7 +59,7 @@ Term * List::head() const {
     if (_elements.empty())
         throw string("Accessing head in an empty list");
     else
-        return getElement(0);
+        return args(0);
 }
 
 List * List::tail() const {
@@ -71,4 +71,8 @@ List * List::tail() const {
         
         return tailListPtr;
     }
+}
+
+int List::arity() {
+    return _elements.size();
 }

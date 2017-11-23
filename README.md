@@ -1,86 +1,60 @@
 # POSD2017F Homework
 
-## Homework assignment 5
+## Homework assignment 6
 
 Please use [the files that were used in course](https://github.com/yccheng66/posd2017f) and copy test header to your repository from this project.
 
-In this assignment, you are required to implement the more complete parser through each test. It will use the interface written in the course. And then, there are few tests will need some new methods of different term class, please follow the description of test, implement each method.
+In this assignment, you are required to implement the complete matching like `X=1.` through parser. And for test, you don't need to write the test by yourself, we will provide the test to you. Therefore on the CI server, you will only have one job. Please follow the test to implement the necessary class and its interface.
 
-And from this week, we start to run [Mob programming](https://www.google.com.tw/search?q=mob+programming). There will be one or two group in every week until the end of semester, they are required to show the demonstration which how they run the mob programming and how to solve the problem that in the assignment. It needs to do rehearse and prior planning with us. See below to get more detail.
+And for the coming Saturday(11/25), there will be two teams need to attend the mob programming. Some adjustment here, please check your name and time, reply to us if you cannot attend the activity on Saturday.
 
+### Team #2 (11/25)
+|   Number  |
+| --------- |
+| 103590028 |
+| 105598043 |
+| 105598062 |
+| 106598006 |
+| 106598016 |
+| 106598027 |
+| 106598029 |
+| 106598041 |
 
-#### Update
+### Team #3 (11/25)
+|   Number  |
+| --------- |
+| 103590006 |
+| 104598046 |
+| 105598060 |
+| 106598004 |
+| 106598011 |
+| 106598045 | 
+| 106598042 |
+| 106598035 |
 
-  * Fri Nov 03 2017 15:06:12
-
-    The method `args()`, it should return `Term *`, not `Term &`. please correct it in your assignment.
-
-    ```diff
-    class Struct {
-        public:
-          int arity(); // return the number of args (terms)
-    -     Term & args(int index); // according to index return the term
-    +     Term * args(int index); // according to index return the term
-      }
-    ```
-
-  * Fri Nov 03 2017 11:55:51
-  
-    The description of test `TEST_F(ParserTest, ListAsStruct)` is wrong, please correct it in your assignment.
-
-    ```diff
-    // Then it should return a Struct which contains two terms.
-    // And #arity() of the Struct should be 2.
-    // And #symbol() of Struct should return ".(1, [])".
-    - // And the first term should be number: "1", the second term should be another Strcut: "[]".
-    + // And the first term should be number: "1", the second term should be another List: "[]".
-    TEST_F(ParserTest, ListAsStruct) {
-
-    }
-    ```
-  
-  * Thu Nov 02 2017 17:30:46
-  
-    1. The date of each team has been changed because we skip the week of mid-exam.
-    
-    2. Some people cannot attend the activity on that week, so we adjust them to other week.
-        \
-        \
-          **Team #2 (11/18)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Team #3 (11/25)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Team #1 (11/04)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Team #9 (01/06)**
-        \
-        ![Imgur](https://i.imgur.com/nkO111j.png) ![Imgur](https://i.imgur.com/mLcnZIb.png) ![Imgur](https://i.imgur.com/ipW1Gvm.png) ![Imgur](https://i.imgur.com/vgN8huc.png)
-        
-    3. If you also cannot attend the activity on that week, please email to us before at least one week.
-    
-    4. ~~About the method: `arity()` and `args()`, sorry for vague explanation. Here is the detail of interface:~~
-    
-    
 #### Assignment requirement
 
-  1. Complete the parser with the description of each test
+  1. Complete the parser through the test.
 
-  2. Implement the new method `arity()`, `args()` in `Struct`.
+  2. Implement the new class `Node` and its interface.
   
-  3. Write the corresponding makefile to generate executable file which named hw5. Note that it is the executable name, not the test file name.
+  3. Write the corresponding makefile to generate executable file which named `hw6`. Note that it is the executable name, not the test file name.
   
-  4. Make sure your CI jobs are both passed before deadline.
+  4. Make sure your CI job is passed before deadline.
 
 #### Marks
 
-  You totally have 20 tests in your own, each one is 2 points.
-  And TA's test also have 20 tests, each one is 3 points.
-  The sum of this homework is 90 points.
+  You totally have 11 tests, each one is 9 points.
+  And for calculating easier, the sum score of assignment is 100 points.
 
 #### Deadline
 
-  Thur Nov 9 2017 23:59:59
+  Wed Nov 29 2017 23:59:59
 
 #### Note
 
   * Try to read building information in console log and fix the hw problem by yourself as possible as you can.
   
-  * If your CI job can not pull your repository, email to us.
-
 
 ## POSD Mob programming
 
@@ -135,118 +109,117 @@ And from this week, we start to run [Mob programming](https://www.google.com.tw/
 
 Ctrl+f for finding your name.
 
-### Team #1 (11/04)
-|   Number  |  Name |
-| --------- | ----- | 
-| 105598052 | 吳育呈 |
-| 106598024 | 鍾承翰 |
-| 106598038 | 李柏霖 | 
-| 106598048 | 郭士銓 | 
-| 106598053 | 陳韻文 | 
-| 106598054 | 楊子冊 |
-| 106598060 | 吳彥銘 |
+### Team #2 (11/25)
+|   Number  |
+| --------- |
+| 103590028 |
+| 105598043 |
+| 105598062 | 
+| 106598006 |
+| 106598016 |
+| 106598027 |
+| 106598029 |
+| 106598041 |
 
-
-### Team #2 (11/18)
-|   Number  |  Name |
-| --------- | ----- | 
-| 103590028 | 簡育聲 |
-| 105598043 | 蔡兆霖 | 
-| 105598062 | 李昀展 | 
-| 106598006 | 林照晟 | 
-| 106598016 | 王暐淇 |
-| 106598027 | 林進偉 |
-| 106598029 | 孫暐媜 |
-| 106598069 | 林琨皓 |
-
-### Team #3 (11/18)
-|   Number  |  Name |
-| --------- | ----- | 
-| 103590006 | 曹暘鑫 |
-| 104598046 | 蘇翊棠 | 
-| 105598060 | 黃釋鋐 | 
-| 106598004 | 李鋒 | 
-| 106598011 | 李宜倫 |
-| 106598013 | 陳泓欣 |
-| 106598042 | 陳彥霖 |
-| 106598035 | 黃靖幃 |
+### Team #3 (11/25)
+|   Number  |
+| --------- |
+| 103590006 |
+| 104598046 |
+| 105598060 | 
+| 106598004 |
+| 106598011 |
+| 106598045 |
+| 106598042 |
+| 106598035 |
 
 ### Team #4 ()
-|   Number  |  Name |
-| --------- | ----- | 
-| 103590452 | 陳厚安 |
-| 105598072 | 方范濠麒| 
-| 106598034 | 劉宸佑 |
-| 106598040 | 何鎮宇 | 
-| 106598045 | 林翰隆 | 
-| 106598056 | 謝柏鋒 | 
-| 106598064 | 賴偉程 |
-| 106598067 | 周妤珊 |
+|   Number  |
+| --------- |
+| 103590452 |
+| 105598072 |
+| 106598034 |
+| 106598040 |
+| 106598013 |
+| 106598056 |
+| 106598064 |
+| 106598067 |
 
 
 ### Team #5 ()
-|   Number  |  Name |
-| --------- | ----- | 
-| 103590026 | 周冠勳 |
-| 105598046 | 莊承蓉 | 
-| 105598059 | 蘇哲弘 | 
-| 106598007 | 何威杭 | 
-| 106598014 | 陳日揚 |
-| 106598043 | 吳揚聲 |
-| 106598052 | 張家豪 |
-| 106598059 | 翁晁宇 |
+|   Number  |
+| --------- |
+| 103590026 |
+| 105598046 |
+| 105598059 |
+| 106598007 |
+| 106598014 |
+| 106598043 |
+| 106598052 |
+| 106598059 |
 
 
 ### Team #6 ()
-|   Number  |  Name |
-| --------- | ----- | 
-| 103590019 | 黃麟傑 |
-| 105598061 | 宋正倫 | 
-| 106598009 | 蕭家瑜 | 
-| 106598017 | 梁冬昇 | 
-| 106598026 | 陳登正 |
-| 106598037 | 許釋文 |
-| 106598047 | 劉宸宗 |
-| 106598057 | 曾辰豫 |
+|   Number  |
+| --------- |
+| 103590019 |
+| 105598061 |
+| 106598009 |
+| 106598017 |
+| 106598026 |
+| 106598037 |
+| 106598047 |
+| 106598057 |
 
 
 ### Team #7 ()
-|   Number  |  Name |
-| --------- | ----- | 
-| 103590450 | 馬茂源 |
-| 105598073 | 林翰廷 | 
-| 106598005 | 盧家馨 | 
-| 106598020 | 李炘潤 | 
-| 106598028 | 范植承 |
-| 106598051 | 洪宇頡 |
-| 106598055 | 劉德均 |
-| 106598068 | 吳承軒 |
+|   Number  |
+| --------- |
+| 103590450 |
+| 105598073 |
+| 106598005 |
+| 106598020 |
+| 106598028 |
+| 106598051 |
+| 106598055 |
+| 106598068 |
 
 
 ### Team #8 ()
-|   Number  |  Name |
-| --------- | ----- | 
-| 105598401 | 鍾宇佳 |
-| 106598010 | 洪紹晏 | 
-| 106598018 | 萬俊瑋 | 
-| 106598025 | 翁翊桓 | 
-| 106598033 | 黃鈺珉 |
-| 106598039 | 林亮勳 |
-| 106598044 | 李家豪 |
-| 106598063 | 廖愷鈞 |
+|   Number  |
+| --------- |
+| 105598401 |
+| 106598010 |
+| 106598018 | 
+| 106598025 |
+| 106598033 |
+| 106598039 |
+| 106598044 |
+| 106598063 |
 
 
 ### Team #9 ()
-|   Number  |  Name |
-| --------- | ----- |
-| 103590002 | 洪子軒 |
-| 106598012 | 陳人鳳 |
-| 106598019 | 郭建陞 |
-| 106598022 | 李修豪 |
-| 106598041 | 劉宗瑋 | 
-| 106598049 | 謝宗佑 | 
-| 106598065 | 李玠民 | 
-| 106598401 | 余俊穎 |
+|   Number  |
+| --------- |
+| 103590002 |
+| 106598012 |
+| 106598019 |
+| 106598022 |
+| 106598069 |
+| 106598049 |
+| 106598065 |
+| 106598401 |
 
+
+### Team #1 (11/04 Done)
+|   Number  |
+| --------- |
+| 105598052 |
+| 106598024 |
+| 106598038 |
+| 106598048 |
+| 106598053 |
+| 106598054 |
+| 106598060 |
 
 #### Change log
