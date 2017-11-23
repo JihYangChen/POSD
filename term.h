@@ -13,6 +13,7 @@ public:
 	virtual string symbol() const = 0;
     virtual string value() const = 0;
 	virtual bool match(Term &term) = 0;
+    virtual ~Term() {}
 };
 
 #endif
