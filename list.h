@@ -11,12 +11,13 @@ class List : public Term {
 public:
     List ();
     List (vector<Term *> const & elements);
-    Term * getElement(int index) const;
+    Term * args(int index) const;
     string symbol() const;
     string value() const;
     bool match(Term & term);
     Term * head() const;
     List * tail() const;
+    int arity();
     
 private:
     vector<Term *> _elements;
