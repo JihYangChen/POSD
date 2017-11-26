@@ -1,7 +1,8 @@
 #ifndef PARSER_H
 #define PARSER_H
 #include <string>
-using std::string;
+#include <stack>
+using std::stack;
 
 #include "atom.h"
 #include "variable.h"
@@ -11,7 +12,7 @@ using std::string;
 #include "list.h"
 #include "node.h"
 
-class Parser{
+class Parser {
 public:
     Parser(Scanner scanner) : _scanner(scanner){}
     Term* createTerm(){
@@ -67,7 +68,13 @@ public:
     }
     
     void matchings() {
-        _expressionTree = createExpressionTree();
+        vector<Node *> nodes;
+        
+        readSentenceAndCreateNodes(nodes);
+        reverse(nodes.begin(), nodes.end());
+        inorderToPreorder(nodes);
+        reverse(nodes.begin(), nodes.end());
+        _expressionTree = buildExpressionTree(nodes);
     }
     
     Node * expressionTree() {
@@ -82,6 +89,9 @@ private:
     FRIEND_TEST(ParserTest,ListOfTermsEmpty);
     FRIEND_TEST(ParserTest,listofTermsTwoNumber);
     FRIEND_TEST(ParserTest, createTerm_nestedStruct3);
+    
+    FRIEND_TEST(ParserTest, ReadSentenceAndCreateNodes);
+    FRIEND_TEST(ParserTest, InorderToPreorder);
     
     Term * createStructure(Atom & structName) {
         int startIndexOfStructArgs = (int)_terms.size();
@@ -128,55 +138,6 @@ private:
         }
     }
     
-    Node* createExpressionTree() {
-        Node *leftSubTree = createSubTree();
-        
-        if (!leftSubTree)
-            return nullptr;
-        else {
-            int conjunctionOperator;
-            Node *conjunctionNode = nullptr;
-            if ((conjunctionOperator =_scanner.nextToken()) != ATOMSC) {
-                if (conjunctionOperator == ',')
-                    conjunctionNode = new Node(COMMA);
-                else if (conjunctionOperator == ';'){
-                    conjunctionNode = new Node(SEMICOLON);
-                    _termsContexStartPosition = (int)_terms.size();
-                }
-                Node *rightSubTree = createExpressionTree();
-                
-                conjunctionNode -> left = leftSubTree;
-                conjunctionNode -> right = rightSubTree;
-                
-                return conjunctionNode;
-            }
-            else
-                return leftSubTree;
-        }
-    }
-    
-    Node* createSubTree() {
-        Term *leftTerm = createTerm();
-        if(!leftTerm)
-            return nullptr;
-        _terms.push_back(leftTerm);
-        
-        int midNodeToken = _scanner.nextToken();
-        Term *rightTerm = createTerm();
-        _terms.push_back(rightTerm);
-        
-        Node *leftNode = new Node(TERM, leftTerm, nullptr, nullptr);
-        Node *rightNode = new Node(TERM, rightTerm, nullptr, nullptr);
-        
-        if (midNodeToken == '=') {
-            Node *midNode = new Node(EQUALITY, nullptr, leftNode, rightNode);
-            _expressionTree = midNode;
-            return midNode;
-        }
-        else
-            return nullptr;
-    }
-    
     Term* findTermExistInTerms(Term &term) {
         vector<Term *>::iterator it = _terms.begin() + _termsContexStartPosition;
         
@@ -211,11 +172,87 @@ private:
         }
         return nullptr;
     }
+    
+    void readSentenceAndCreateNodes(vector<Node *> &nodes) {
+        Term *term;
+        if ((term = createTerm())) {
+            _terms.push_back(term);
+            nodes.push_back(new Node(TERM, term, nullptr, nullptr));
+            
+            int token;
+            while ((token = _scanner.nextToken()) != ATOMSC) {
+                if (token == '=')
+                    nodes.push_back(new Node(EQUALITY));
+                else if (token == ',')
+                    nodes.push_back(new Node(COMMA));
+                else if (token == ';'){
+                    nodes.push_back(new Node(SEMICOLON));
+                    _termsContexStartPosition = static_cast<int>(_terms.size());
+                }
+                
+                term = createTerm();
+                _terms.push_back(term);
+                nodes.push_back(new Node(TERM, term, nullptr, nullptr));
+            }
+        }
+    }
+    
+    void inorderToPreorder(vector<Node *> &inputNodes) {
+        stack<Node *> stack;
+        vector<Node *>  outputNodes;
+        
+        reverse(inputNodes.begin(), inputNodes.end());
+        
+        for (vector<Node *>::iterator it = inputNodes.begin(); it<inputNodes.end(); it++) {
+            Node* node = *it;
+            if (node->payload == TERM)
+                outputNodes.push_back(node);
+            else if ((stack.empty()) || (node->payload <= stack.top()->payload))
+                stack.push(node);
+            else {
+                while (node -> payload > stack.top()->payload){
+                    outputNodes.push_back(stack.top());
+                    stack.pop();
+                    
+                    if (stack.empty())
+                        break;
+                }
+                stack.push(node);
+            }
+        }
+        
+        while (!stack.empty()){
+            outputNodes.push_back(stack.top());
+            stack.pop();
+        }
+        
+        reverse(outputNodes.begin(), outputNodes.end());
+        inputNodes.assign(outputNodes.begin(), outputNodes.end());
+    }
+    
+    Node* buildExpressionTree(vector<Node *> &nodes) {
+        stack<Node *> stack;
+        
+        for (vector<Node *>::iterator it  = nodes.begin(); it<nodes.end(); it++) {
+            Node* node = *it;
+            if (node->payload == TERM)
+                stack.push(node);
+            else {
+                node -> right = stack.top();
+                stack.pop();
+                node -> left = stack.top();
+                stack.pop();
+                stack.push(node);
+            }
+        }
+        return stack.top();
+    }
    
     Scanner _scanner;
     vector<Term *> _terms;
     Node *_expressionTree;
     int _termsContexStartPosition = 0;
 };
+
 #endif
 
