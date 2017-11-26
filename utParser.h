@@ -444,5 +444,99 @@ TEST_F(ParserTest, MatchingSuccess) {
   EXPECT_EQ("s(s(2))", terms[4]->value());
 }
 
+/*
+TEST_F(ParserTest, ReadSentenceAndCreateNodes) {
+    Scanner scanner("X=1, Y=s(30,21,jay) ; Z=tom.");
+    Parser parser(scanner);
+    vector<Node *> nodes;
+    parser.readSentenceAndCreateNodes(nodes);
+
+    EXPECT_EQ(11, nodes.size());
+    
+    EXPECT_EQ(TERM, nodes[0]->payload);
+    EXPECT_EQ("X", nodes[0]->term->symbol());
+    EXPECT_EQ(EQUALITY, nodes[1]->payload);
+    EXPECT_EQ(TERM, nodes[2]->payload);
+    EXPECT_EQ("1", nodes[2]->term->symbol());
+    
+    EXPECT_EQ(COMMA, nodes[3]->payload);
+    
+    EXPECT_EQ(TERM, nodes[4]->payload);
+    EXPECT_EQ("Y", nodes[4]->term->symbol());
+    EXPECT_EQ(EQUALITY, nodes[5]->payload);
+    EXPECT_EQ(TERM, nodes[6]->payload);
+    EXPECT_EQ("s(30, 21, jay)", nodes[6]->term->symbol());
+    
+    EXPECT_EQ(SEMICOLON, nodes[7]->payload);
+    
+    EXPECT_EQ(TERM, nodes[8]->payload);
+    EXPECT_EQ("Z", nodes[8]->term->symbol());
+    EXPECT_EQ(EQUALITY, nodes[9]->payload);
+    EXPECT_EQ(TERM, nodes[10]->payload);
+    EXPECT_EQ("tom", nodes[10]->term->symbol());
+}
+
+TEST_F(ParserTest, InorderToPreorder) {
+    Scanner scanner("X=1, Y=s(30,21,jay) ; Z=tom.");
+    Parser parser(scanner);
+    vector<Node *> nodes;
+    parser.readSentenceAndCreateNodes(nodes);
+    parser.inorderToPreorder(nodes);
+    
+    EXPECT_EQ(SEMICOLON, nodes[0]->payload);
+    EXPECT_EQ(COMMA, nodes[1]->payload);
+    EXPECT_EQ(EQUALITY, nodes[2]->payload);
+    
+    EXPECT_EQ(TERM, nodes[3]->payload);
+    EXPECT_EQ("X", nodes[3]->term->symbol());
+    EXPECT_EQ(TERM, nodes[4]->payload);
+    EXPECT_EQ("1", nodes[4]->term->symbol());
+    
+    EXPECT_EQ(EQUALITY, nodes[5]->payload);
+    EXPECT_EQ(TERM, nodes[6]->payload);
+    EXPECT_EQ("Y", nodes[6]->term->symbol());
+    EXPECT_EQ(TERM, nodes[7]->payload);
+    EXPECT_EQ("s(30, 21, jay)", nodes[7]->term->symbol());
+    
+    EXPECT_EQ(EQUALITY, nodes[8]->payload);
+    EXPECT_EQ(TERM, nodes[9]->payload);
+    EXPECT_EQ("Z", nodes[9]->term->symbol());
+    EXPECT_EQ(TERM, nodes[10]->payload);
+    EXPECT_EQ("tom", nodes[10]->term->symbol());
+    
+}
+
+TEST_F(ParserTest, BuildExpressionTree) {
+    Scanner scanner("X=1, Y=s(30,21,jay) ; Z=tom.");
+    Parser parser(scanner);
+    
+    parser.matchings();
+    Node * et = parser.expressionTree();
+    
+    EXPECT_EQ(SEMICOLON, et->payload);
+    
+    EXPECT_EQ(COMMA, et->left->payload);
+    
+    EXPECT_EQ(EQUALITY, et->left->left->payload);
+    EXPECT_EQ(TERM, et->left->left->left->payload);
+    EXPECT_EQ("X", et->left->left->left->term->symbol());
+    EXPECT_EQ(TERM, et->left->left->right->payload);
+    EXPECT_EQ("1", et->left->left->right->term->symbol());
+    
+    EXPECT_EQ(EQUALITY, et->left->right->payload);
+    EXPECT_EQ(TERM, et->left->right->left->payload);
+    EXPECT_EQ("Y", et->left->right->left->term->symbol());
+    EXPECT_EQ(TERM, et->left->right->right->payload);
+    EXPECT_EQ("s(30, 21, jay)", et->left->right->right->term->symbol());
+    
+    EXPECT_EQ(EQUALITY, et->right->payload);
+    
+    EXPECT_EQ(TERM, et->right->left->payload);
+    EXPECT_EQ("Z", et->right->left->term->symbol());
+    EXPECT_EQ(TERM, et->right->right->payload);
+    EXPECT_EQ("tom", et->right->right->term->symbol());
+    
+}
+*/
 
 #endif
