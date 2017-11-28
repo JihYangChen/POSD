@@ -207,10 +207,10 @@ private:
             Node* node = *it;
             if (node->payload == TERM)
                 outputNodes.push_back(node);
-            else if ((stack.empty()) || (node->payload <= stack.top()->payload))
+            else if ((stack.empty()) || (node->payload >= stack.top()->payload))
                 stack.push(node);
             else {
-                while (node -> payload > stack.top()->payload){
+                while (node -> payload < stack.top()->payload){
                     outputNodes.push_back(stack.top());
                     stack.pop();
                     
