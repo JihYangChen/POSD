@@ -3,7 +3,7 @@
 
 #include "term.h"
 
-enum Operators {TERM, EQUALITY, COMMA, SEMICOLON};
+enum Operators {TERM, SEMICOLON, COMMA, EQUALITY};
 
 class Node {
 public:
