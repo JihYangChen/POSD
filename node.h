@@ -3,6 +3,8 @@
 
 #include "term.h"
 
+class Iterator;
+
 enum Operators {TERM, SEMICOLON, COMMA, EQUALITY};
 
 class Node {

@@ -1,4 +1,5 @@
 #include "node.h"
+#include "iterator.h"
 
 bool Node::evaluate() {
     
@@ -23,4 +24,12 @@ bool Node::evaluate() {
         default:
             return false;
     }
+}
+
+Iterator * Node::createDFSIterator() {
+    return new DFSIterator(this);
+}
+
+Iterator * Node::createBFSIterator() {
+    return new BFSIterator(this);
 }
