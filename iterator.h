@@ -18,7 +18,7 @@ public:
 
 class DFSIterator :public Iterator {
 public:
-    DFSIterator(Node *et): _expressionTree(et) {}
+    DFSIterator(Node *et): _expressionTree(et) { }
     
     void first() {
         _index = 0;
@@ -33,7 +33,7 @@ public:
         if(_dfsOrder[_index] -> term)
             return _dfsOrder[_index] -> term;
         else {
-            static string table[] = { "", ";", ",", "=" };
+            string table[] = { "", ";", ",", "=" };
             return new Atom(table[_dfsOrder[_index] -> payload]);
         }
     }
@@ -57,27 +57,30 @@ private:
     int _index;
     Node *_expressionTree;
     vector<Node *> _dfsOrder;
-    
 };
 
 class BFSIterator :public Iterator {
 public:
-    BFSIterator(Node *et): _expressionTree(et) {}
+    BFSIterator(Node *et): _expressionTree(et) { }
+    
     void first() {
         _index = 0;
         bfs(_expressionTree);
     }
+    
     void next() {
         _bfsOrder[++_index];
     }
+    
     Term * currentItem() const {
         if(_bfsOrder[_index] -> term)
             return _bfsOrder[_index] -> term;
         else {
-            static string table[] = { "", ";", ",", "=" };
+            string table[] = { "", ";", ",", "=" };
             return new Atom(table[_bfsOrder[_index] -> payload]);
         }
     }
+    
     bool isDone() const {
         if (_index == (_bfsOrder.size() - 1))
             return true;
