@@ -24,3 +24,7 @@ bool Number::match(Term &term) {
     else
         return symbol() == term.symbol();
 }
+
+Iterator* Number::createIterator() {
+    return new NullIterator(this);
+}
