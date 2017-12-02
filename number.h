@@ -15,7 +15,6 @@ public:
     string symbol() const;
     string value() const;
     bool match(Term &);
-    Iterator* createIterator();
 };
 
 

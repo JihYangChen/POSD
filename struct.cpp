@@ -1,4 +1,5 @@
 #include "struct.h"
+#include "iterator.h"
 
 Struct::Struct(Atom const &name, std::vector<Term *> args) : _name(name), _args(args) {}
 
@@ -66,4 +67,18 @@ bool Struct::match(Term &term) {
     
     // term's type isn't Variable or Struct
     return false;
+}
+
+Iterator<Term *> * Struct::createIterator()
+{
+    return new StructIterator<Term *>(this);
+}
+Iterator<Term *> * Struct::createDFSIterator()
+{
+    return new DFSIterator<Term *>(this);
+}
+
+Iterator<Term *> * Struct::createBFSIterator()
+{
+    return new BFSIterator<Term *>(this);
 }

@@ -25,11 +25,3 @@ bool Node::evaluate() {
             return false;
     }
 }
-
-Iterator * Node::createDFSIterator() {
-    return new DFSIterator(this);
-}
-
-Iterator * Node::createBFSIterator() {
-    return new BFSIterator(this);
-}

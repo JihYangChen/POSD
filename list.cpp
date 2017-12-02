@@ -1,5 +1,6 @@
-#include "list.h"
 #include <iostream>
+#include "list.h"
+#include "iterator.h"
 
 List::List() { }
 
@@ -74,5 +75,20 @@ List * List::tail() const {
 }
 
 int List::arity() {
-    return _elements.size();
+    return static_cast<int>(_elements.size());
+}
+
+Iterator<Term *> * List::createIterator()
+{
+    return new ListIterator<Term *>(this);
+}
+
+Iterator<Term *> * List::createDFSIterator()
+{
+    return new DFSIterator<Term *>(this);
+}
+
+Iterator<Term *> * List::createBFSIterator()
+{
+    return new BFSIterator<Term *>(this);
 }
