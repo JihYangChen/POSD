@@ -20,8 +20,8 @@ public:
 template <class T>
 class NullIterator :public Iterator<T>{
 public:
-    NullIterator(T n){}
-
+    friend class Term;
+    
     void first(){}
     
     void next(){}
@@ -34,6 +34,8 @@ public:
         return true;
     }
     
+private:
+    NullIterator(T n) { }
 };
 
 template <class T>
@@ -55,8 +57,10 @@ public:
     void next() {
         _index++;
     }
+    
 private:
-    StructIterator(T s): _index(0), _s(dynamic_cast<Struct*>(s)) {}
+    StructIterator(Struct * s): _index(0), _s(s) {}
+    
     int _index;
     Struct* _s;
 };
@@ -64,7 +68,7 @@ private:
 template <class T>
 class ListIterator :public Iterator<T> {
 public:
-    ListIterator(T list): _index(0), _list(dynamic_cast<List *>(list)) {}
+    friend class List;
     
     void first() {
         _index = 0;
@@ -82,6 +86,8 @@ public:
         _index++;
     }
 private:
+    ListIterator(List * list): _index(0), _list(list) {}
+    
     int _index;
     List* _list;
 };
@@ -89,7 +95,8 @@ private:
 template <class T>
 class DFSIterator :public Iterator<T> {
 public:
-    DFSIterator(T root): _index(0), _rootNode(root) {}
+    friend class Struct;
+    friend class List;
     
     void first() {
         _dfsResults.clear();
@@ -110,6 +117,8 @@ public:
     }
     
 private:
+    DFSIterator(T root): _index(0), _rootNode(root) {}
+    
     void DFS(T node) {
         _dfsResults.push_back(node);
         
@@ -126,7 +135,8 @@ private:
 template <class T>
 class BFSIterator :public Iterator<T> {
 public:
-    BFSIterator(T root): _index(0), _rootNode(root) {}
+    friend class Struct;
+    friend class List;
     
     void first() {
         _bfsResults.clear();
@@ -147,6 +157,8 @@ public:
     }
     
 private:
+    BFSIterator(T root): _index(0), _rootNode(root) {}
+    
     void BFS() {
         queue<T> q;
         q.push(_rootNode);
