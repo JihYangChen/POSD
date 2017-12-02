@@ -7,6 +7,9 @@
 #include <vector>
 using std::vector;
 
+template <class T>
+class Iterator ;
+
 class List : public Term {
 public:
     List ();
@@ -18,6 +21,9 @@ public:
     Term * head() const;
     List * tail() const;
     int arity();
+    Iterator<Term *>* createIterator();
+    Iterator<Term *>* createDFSIterator();
+    Iterator<Term *>* createBFSIterator();
     
 private:
     vector<Term *> _elements;

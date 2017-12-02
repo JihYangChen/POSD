@@ -3,6 +3,7 @@
 
 #include "term.h"
 #include "variable.h"
+#include "iterator.h"
 #include <sstream>
 
 class Number : public Term {
@@ -10,10 +11,10 @@ private:
     string _symbol;
     
 public:
-    Number (double value);
+    Number (double);
     string symbol() const;
     string value() const;
-    bool match(Term &term);
+    bool match(Term &);
 };
 
 

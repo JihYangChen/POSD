@@ -1,4 +1,5 @@
 #include "node.h"
+#include "iterator.h"
 
 bool Node::evaluate() {
     

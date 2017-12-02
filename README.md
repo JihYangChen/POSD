@@ -1,55 +1,35 @@
 # POSD2017F Homework
 
-## Homework assignment 6
+## Homework assignment 7
 
 Please use [the files that were used in course](https://github.com/yccheng66/posd2017f) and copy test header to your repository from this project.
 
-In this assignment, you are required to implement the complete matching like `X=1.` through parser. And for test, you don't need to write the test by yourself, we will provide the test to you. Therefore on the CI server, you will only have one job. Please follow the test to implement the necessary class and its interface.
-
-And for the coming Saturday(11/25), there will be two teams need to attend the mob programming. Some adjustment here, please check your name and time, reply to us if you cannot attend the activity on Saturday.
-
-### Team #2 (11/25)
-|   Number  |
-| --------- |
-| 103590028 |
-| 105598043 |
-| 105598062 |
-| 106598006 |
-| 106598016 |
-| 106598027 |
-| 106598029 |
-| 106598041 |
-
-### Team #3 (11/25)
-|   Number  |
-| --------- |
-| 103590006 |
-| 104598046 |
-| 105598060 |
-| 106598004 |
-| 106598011 |
-| 106598045 | 
-| 106598042 |
-| 106598035 |
+### Mob programming team on 12/02
+|   Team#4  |   Team#5  |
+| --------- | --------- |
+| 103590452 | 103590026 |
+| ~~105598072~~ | 105598046 |
+| 106598034 | 105598059 |
+| 106598040 | 106598007 |
+| 106598013 | 106598014 |
+| 106598056 | 106598043 | 
+| 106598064 | 106598052 |
+| 106598067 | 106598059 |
 
 #### Assignment requirement
-
-  1. Complete the parser through the test.
-
-  2. Implement the new class `Node` and its interface.
+ 
+  1. Write the corresponding makefile to generate executable file which named `hw7`. Note that it is the executable name, not the test file name.
   
-  3. Write the corresponding makefile to generate executable file which named `hw6`. Note that it is the executable name, not the test file name.
-  
-  4. Make sure your CI job is passed before deadline.
+  2. Make sure your CI job is passed before deadline.
 
 #### Marks
 
-  You totally have 11 tests, each one is 9 points.
-  And for calculating easier, the sum score of assignment is 100 points.
+  You totally have 10 tests, each one is 10 points.
+  The sum score of assignment is 100 points.
 
 #### Deadline
 
-  Wed Nov 29 2017 23:59:59
+  Fri Dec 8 2017 23:59:59
 
 #### Note
 
@@ -88,10 +68,16 @@ And for the coming Saturday(11/25), there will be two teams need to attend the m
   2. For each one student, you will get a questonnaire before mob, the questonnaire is about personal planning that what do you want to get from this time(like what's mob programming in reality? or how does other guy do his/her assignment, etc.). So, think about it before mob.
 
   3. Plan the solution for assignmnet: do not just come here and wait for other guy share their wonderful solution. Think about problem first by yourself, therefore results a good communication and no wasting time.
-
+`
 #### Demonstration
 
-  In following Friday, Each team have **50 minutes** to show the demonstration which how they run the mob programming and how to solve the problem that in the assignment. 
+  On the Friday of next week, Each team have about **20 minutes** to show the demonstration which how they run the mob programming and how to solve the problem that in the assignment.
+  
+  Two teams will do the demonstration in order, the first team done a part of the code with three tests, the second team will need to continue to do the demo with the code.
+
+  Each team will demo about three tests in the class, you don't have to complete the all tests. The three tests is specified by TA, and we will pick the simple, medium and complex test for each team.
+  
+  About the code that you write through the mob, it will not be used in the later course, so you don't need to push it to repository of the course.
 
 #### Schedule on Saturday
 
@@ -99,41 +85,21 @@ And for the coming Saturday(11/25), there will be two teams need to attend the m
 
   If you are on the week, please fill out the [lunch questionnaire](https://docs.google.com/forms/d/e/1FAIpQLSecaGZM_WujJToLXw9CfXtfg-8c-gXzbxOb9TT5TXlqZOsNxg/viewform?c=0&w=1&usp=mail_form_link), and **launch is free**.
 
-  Break ice and lunch(free): **12 : 00 ~ 13 :00**
+  Break ice and lunch(free): **12 : 00 ~ 12 : 50**
+
+  Prepared: **12 : 50 ~ 13 : 00**
 
   Mob programming: **13 : 00 ~ 16 : 00**
 
-  Location: **宏裕科技大樓 13F Lab1321**
+  Retrospective: **16 : 00 ~ 16 : 30**
+
+  Location: **宏裕科技大樓 13F Lab1321 or 16F 1622**
 
 #### Team list：
 
 Ctrl+f for finding your name.
 
-### Team #2 (11/25)
-|   Number  |
-| --------- |
-| 103590028 |
-| 105598043 |
-| 105598062 | 
-| 106598006 |
-| 106598016 |
-| 106598027 |
-| 106598029 |
-| 106598041 |
-
-### Team #3 (11/25)
-|   Number  |
-| --------- |
-| 103590006 |
-| 104598046 |
-| 105598060 | 
-| 106598004 |
-| 106598011 |
-| 106598045 |
-| 106598042 |
-| 106598035 |
-
-### Team #4 ()
+### Team #4 (12/02)
 |   Number  |
 | --------- |
 | 103590452 |
@@ -146,7 +112,7 @@ Ctrl+f for finding your name.
 | 106598067 |
 
 
-### Team #5 ()
+### Team #5 (12/02)
 |   Number  |
 | --------- |
 | 103590026 |
@@ -221,5 +187,29 @@ Ctrl+f for finding your name.
 | 106598053 |
 | 106598054 |
 | 106598060 |
+
+### Team #2 (11/25 Done)
+|   Number  |
+| --------- |
+| 103590028 |
+| 105598043 |
+| 105598062 | 
+| 106598006 |
+| 106598016 |
+| 106598027 |
+| 106598029 |
+| 106598041 |
+
+### Team #3 (11/25 Done)
+|   Number  |
+| --------- |
+| 103590006 |
+| 104598046 |
+| 105598060 | 
+| 106598004 |
+| 106598011 |
+| 106598045 |
+| 106598042 |
+| 106598035 |
 
 #### Change log
