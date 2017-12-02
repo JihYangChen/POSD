@@ -5,6 +5,9 @@
 #include "atom.h"
 #include <vector>
 
+template <class T>
+class Iterator;
+
 class Struct : public Term
 {
 public:
@@ -15,6 +18,9 @@ public:
     string value() const;
     int arity();
     bool match(Term &term);
+    Iterator<Term *> * createIterator();
+    Iterator<Term *> * createDFSIterator();
+    Iterator<Term *> * createBFSIterator();
     
 private:
     Atom _name;

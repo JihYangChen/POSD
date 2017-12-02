@@ -3,8 +3,6 @@
 
 #include "term.h"
 
-class Iterator;
-
 enum Operators {TERM, SEMICOLON, COMMA, EQUALITY};
 
 class Node {
@@ -18,9 +16,6 @@ public:
     Node(Operators op, Term *t, Node *l, Node *r):payload(op), term(t), left(l), right(r) {}
     
     bool evaluate();
-    
-    Iterator * createDFSIterator();
-    Iterator * createBFSIterator();
 };
 
 #endif
