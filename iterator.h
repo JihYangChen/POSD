@@ -109,7 +109,7 @@ public:
     }
     
     bool isDone() const {
-        return _index >= _dfsResults.size() - 1;
+        return _index >= _dfsResults.size();
     }
     
     void next() {
@@ -149,7 +149,7 @@ public:
     }
     
     bool isDone() const {
-        return _index >= _bfsResults.size() - 1;
+        return _index >= _bfsResults.size();
     }
     
     void next() {
