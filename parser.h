@@ -11,12 +11,14 @@ using std::stack;
 #include "struct.h"
 #include "list.h"
 #include "node.h"
+#include "expression.h"
 
 class Parser {
 public:
     Parser(Scanner scanner) : _scanner(scanner){}
     Term* createTerm(){
         int token = _scanner.nextToken();
+        _currentToken = token;
         Term *newTerm = nullptr;
         
         // Create Variable
@@ -80,7 +82,56 @@ public:
     Node * expressionTree() {
         return _expressionTree;
     }
-   
+    
+    /* Build interpreter's expression */
+    
+    void buildExpression(){
+        disjunctionMatch();
+        restDisjunctionMatch();
+    }
+    
+    Expression* getExpressionTree(){
+        return _expStack.top();
+    }
+    
+    void disjunctionMatch() {
+        conjunctionMatch();
+        restConjunctionMatch();
+    }
+    
+    void restDisjunctionMatch() {
+        if (_scanner.currentChar() == ';') {
+            createTerm();
+            disjunctionMatch();
+            Expression *right = _expStack.top();
+            _expStack.pop();
+            Expression *left = _expStack.top();
+            _expStack.pop();
+            _expStack.push(new DisjExp(left, right));
+            restDisjunctionMatch();
+        }
+    }
+    
+    void conjunctionMatch() {
+        Term * left = createTerm();
+        if (createTerm() == nullptr && _currentToken == '=') {
+            Term * right = createTerm();
+            _expStack.push(new MatchExp(left, right));
+        }
+    }
+    
+    void restConjunctionMatch() {
+        if (_scanner.currentChar() == ',') {
+            createTerm();
+            conjunctionMatch();
+            Expression *right = _expStack.top();
+            _expStack.pop();
+            Expression *left = _expStack.top();
+            _expStack.pop();
+            _expStack.push(new ConjExp(left, right));
+            restConjunctionMatch();
+        }
+    }
     
     
 
@@ -249,9 +300,11 @@ private:
     }
    
     Scanner _scanner;
+    int _currentToken;
     vector<Term *> _terms;
     Node *_expressionTree;
     int _termsContexStartPosition = 0;
+    stack<Expression*> _expStack;
 };
 
 #endif

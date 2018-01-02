@@ -444,7 +444,6 @@ TEST_F(ParserTest, MatchingSuccess) {
   EXPECT_EQ("s(s(2))", terms[4]->value());
 }
 
-/*
 TEST_F(ParserTest, ReadSentenceAndCreateNodes) {
     Scanner scanner("X=1, Y=s(30,21,jay) ; Z=tom.");
     Parser parser(scanner);
@@ -537,6 +536,5 @@ TEST_F(ParserTest, BuildExpressionTree) {
     EXPECT_EQ("tom", et->right->right->term->symbol());
     
 }
-*/
 
 #endif
