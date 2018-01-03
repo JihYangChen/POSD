@@ -6,6 +6,7 @@
 #include "utParser.h"
 #include "utIterator.h"
 #include "utExpression.h"
+#include "utShell.h"
 
 int main( int argc , char **argv )
 {

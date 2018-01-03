@@ -16,7 +16,7 @@ using std::stack;
 class Parser {
 public:
     Parser(Scanner scanner) : _scanner(scanner){}
-    Term* createTerm(){
+    Term* createTerm() {
         int token = _scanner.nextToken();
         _currentToken = token;
         Term *newTerm = nullptr;
@@ -114,8 +114,10 @@ public:
     
     void conjunctionMatch() {
         Term * left = createTerm();
+        _terms.push_back(left);
         if (createTerm() == nullptr && _currentToken == '=') {
             Term * right = createTerm();
+            _terms.push_back(right);
             _expStack.push(new MatchExp(left, right));
         }
     }
@@ -131,6 +133,17 @@ public:
             _expStack.push(new ConjExp(left, right));
             restConjunctionMatch();
         }
+    }
+    
+    string getResult() {
+        Expression *expressionTree = getExpressionTree();
+        if (expressionTree -> evaluate()) {
+            string returnStr = expressionTree -> getExpressionString() + ".";
+            MatchExp::clearMathcingExpressions();
+            return returnStr;
+        }
+        else
+            return "false.";
     }
     
     
