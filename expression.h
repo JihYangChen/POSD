@@ -21,14 +21,17 @@ public:
     }
     
     string getExpressionString() {
+        
         if (findMatchingExpression(_left->symbol() + " = " + _right->value()))
             return "";
         else {
             _matchingExpressions.push_back(_left->symbol() + " = " + _right->value());
             if (_left->symbol() == _right->symbol())
                 return "true";
-            else
+            else if (this->evaluate())
                 return _left->symbol() + " = " + _right->value();
+            else
+                return "false";
         }
     }
     
@@ -62,10 +65,11 @@ public:
     }
     
     string getExpressionString() {
-        
+        if (!evaluate())
+            return "false";
         string leftStr = _left->getExpressionString();
         string rightStr = _right->getExpressionString();
-        
+
         if (leftStr=="" || rightStr=="")
             return leftStr + rightStr;
         else if (leftStr == "true")
@@ -92,7 +96,16 @@ public:
     }
     
     string getExpressionString() {
-        return "";
+        string leftStr = _left->getExpressionString();
+        MatchExp::clearMathcingExpressions();
+        string rightStr = _right->getExpressionString();
+        
+        if (leftStr=="false")
+            return rightStr;
+        else if (rightStr=="false")
+            return leftStr;
+        else
+            return leftStr + "; " + rightStr;
     }
     
 private:

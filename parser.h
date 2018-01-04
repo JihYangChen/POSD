@@ -102,6 +102,7 @@ public:
     void restDisjunctionMatch() {
         if (_scanner.currentChar() == ';') {
             createTerm();
+            _termsContexStartPosition = static_cast<int>(_terms.size());
             disjunctionMatch();
             Expression *right = _expStack.top();
             _expStack.pop();
@@ -137,13 +138,13 @@ public:
     
     string getResult() {
         Expression *expressionTree = getExpressionTree();
-        if (expressionTree -> evaluate()) {
-            string returnStr = expressionTree -> getExpressionString() + ".";
-            MatchExp::clearMathcingExpressions();
-            return returnStr;
-        }
-        else
-            return "false.";
+//        if (expressionTree -> evaluate()) {
+        string returnStr = expressionTree -> getExpressionString() + ".";
+        MatchExp::clearMathcingExpressions();
+        return returnStr;
+//        }
+//        else
+//            return "false.";
     }
     
     
