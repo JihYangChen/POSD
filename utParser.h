@@ -168,7 +168,7 @@ TEST_F(ParserTest, createTerm_illeageTerm){
     parser.createTerm();
     ASSERT_TRUE(false) << "It should throw a string; \"unexpected token\" as exception.";
   } catch (std::string exception) {
-    EXPECT_EQ(exception, std::string("unexpected token"));
+    EXPECT_EQ(exception, std::string("Unbalanced operator"));
   }
 }
 
@@ -444,7 +444,6 @@ TEST_F(ParserTest, MatchingSuccess) {
   EXPECT_EQ("s(s(2))", terms[4]->value());
 }
 
-/*
 TEST_F(ParserTest, ReadSentenceAndCreateNodes) {
     Scanner scanner("X=1, Y=s(30,21,jay) ; Z=tom.");
     Parser parser(scanner);
@@ -537,6 +536,5 @@ TEST_F(ParserTest, BuildExpressionTree) {
     EXPECT_EQ("tom", et->right->right->term->symbol());
     
 }
-*/
 
 #endif
