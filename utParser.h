@@ -168,7 +168,7 @@ TEST_F(ParserTest, createTerm_illeageTerm){
     parser.createTerm();
     ASSERT_TRUE(false) << "It should throw a string; \"unexpected token\" as exception.";
   } catch (std::string exception) {
-    EXPECT_EQ(exception, std::string("unexpected token"));
+    EXPECT_EQ(exception, std::string("Unbalanced operator"));
   }
 }
 

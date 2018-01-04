@@ -88,6 +88,8 @@ public:
     void buildExpression(){
         disjunctionMatch();
         restDisjunctionMatch();
+        if (createTerm() == nullptr)
+            throw string("Missing token '.'");
     }
     
     Expression* getExpressionTree(){
@@ -115,11 +117,20 @@ public:
     
     void conjunctionMatch() {
         Term * left = createTerm();
+        if (left->symbol() == ".")
+            throw string("Unexpected ',' before '.'");
         _terms.push_back(left);
         if (createTerm() == nullptr && _currentToken == '=') {
             Term * right = createTerm();
             _terms.push_back(right);
             _expStack.push(new MatchExp(left, right));
+        } else {
+            if (_currentToken == ';')
+                throw string("Unexpected ';' before '.'");
+            else if (_currentToken == ',')
+                throw string("Unexpected ',' before '.'");
+            else
+                throw string(left->symbol() + " does never get assignment");
         }
     }
     
@@ -163,7 +174,7 @@ private:
         createTerms();
         
         if(_scanner.nextToken() != ')')
-            throw string("unexpected token");
+            throw string("Unbalanced operator");
         
         vector<Term *> args(_terms.begin() + startIndexOfStructArgs, _terms.end());
         _terms.erase(_terms.begin() + startIndexOfStructArgs, _terms.end());
@@ -176,7 +187,7 @@ private:
         createTerms();
         
         if(_scanner.nextToken() != ']')
-            throw string("unexpected token");
+            throw string("Unbalanced operator");
         
         vector<Term *> args(_terms.begin() + startIndexOfListArgs, _terms.end());
         _terms.erase(_terms.begin() + startIndexOfListArgs, _terms.end());
