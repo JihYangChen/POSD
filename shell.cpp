@@ -41,7 +41,7 @@ int main( int argc , char **argv )
         }
     };
     
-    for (cout << "?-", getline(cin, input); !isMatchHalt(); cin >> input)
+    for (cout << "?-", getline(cin, input); !isMatchHalt(); getline(cin, input))
     {
         if (isEndOfClause())
         {
